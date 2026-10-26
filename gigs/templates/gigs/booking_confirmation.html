@@ -1,0 +1,44 @@
+
+{% extends "gigs/base.html" %}
+
+{% block title %}Booking Reference | Live Gigs{% endblock %}
+
+{% block content %}
+    <section class="panel">
+        <h2>Booking received</h2>
+
+        <p>Your booking has been recorded in our demo system.</p>
+
+        <p>
+            <strong>Booking reference:</strong><br>
+            {{ booking.reference }}
+        </p>
+
+        <p>
+            <strong>Name:</strong> {{ booking.customer_name }}<br>
+            <strong>Email:</strong> {{ booking.customer_email }}
+        </p>
+
+        <h3>Tickets</h3>
+
+        {% for item in booking.items.all %}
+            <p>
+                {{ item.quantity }} × {{ item.ticket_type.name }}
+                — £{{ item.line_total|floatformat:2 }}
+            </p>
+        {% endfor %}
+
+        <p class="price">
+            Total: £{{ booking.total_price|floatformat:2 }}
+        </p>
+
+        <p class="muted">
+            Status: {{ booking.get_status_display }}.
+            No payment has been taken.
+        </p>
+
+        <a class="button" href="{% url 'gigs:gig_list' %}">
+            Browse more gigs
+        </a>
+    </section>
+{% endblock %}

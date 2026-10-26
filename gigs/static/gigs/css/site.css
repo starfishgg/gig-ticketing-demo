@@ -1,0 +1,112 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5f5f7;
+    color: #222;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.site-header {
+    padding: 24px 6%;
+    background: #202027;
+    color: white;
+}
+
+.site-header h1 {
+    margin: 0;
+}
+
+.site-header a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+.panel,
+.gig-card {
+    padding: 24px;
+    background: white;
+    border: 1px solid #e5e5e9;
+    border-radius: 10px;
+}
+
+.gig-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.gig-card h2 {
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.gig-card h2 a {
+    color: #222;
+    text-decoration: none;
+}
+
+.gig-card h2 a:hover {
+    text-decoration: underline;
+}
+
+.muted,
+.venue,
+.date {
+    color: #62626b;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.empty-state {
+    padding: 40px 24px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.ticket {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid #e5e5e9;
+}
+
+.ticket:last-child {
+    border-bottom: none;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #34343e;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.button:hover {
+    background: #50505d;
+}
+
+@media (max-width: 520px) {
+    .ticket {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

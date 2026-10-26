@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Gig, TicketType, Venue
+from .models import Booking, BookingItem, Gig, TicketType, Venue
 
 
 
@@ -24,3 +24,31 @@ class TicketTypeAdmin(admin.ModelAdmin):
     list_display = ("name", "gig", "price", "quantity_available")
     list_select_related = ("gig",)
     search_fields = ("name", "gig__title")
+
+
+
+
+class BookingItemInline(admin.TabularInline):
+    model = BookingItem
+    extra = 0
+    readonly_fields = ("line_total",)
+
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = (
+        "reference",
+        "customer_name",
+        "customer_email",
+        "status",
+        "total_price",
+        "created_at",
+    )
+    list_filter = ("status", "created_at")
+    search_fields = (
+        "reference",
+        "customer_name",
+        "customer_email",
+    )
+    readonly_fields = ("reference", "created_at", "total_price")
+    inlines = [BookingItemInline]

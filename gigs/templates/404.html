@@ -1,0 +1,16 @@
+
+{% extends "gigs/base.html" %}
+
+{% block title %}Page Not Found | Live Gigs{% endblock %}
+
+{% block content %}
+    <section class="panel empty-state">
+        <h2>We couldn't find that page</h2>
+        <p>The gig may no longer be available, or the address may be incorrect.</p>
+        <p>
+            <a class="button" href="{% url 'gigs:gig_list' %}">
+                Browse all gigs
+            </a>
+        </p>
+    </section>
+{% endblock %}

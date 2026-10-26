@@ -1,0 +1,24 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Live Gigs{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'gigs/css/site.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header class="site-header">
+        <h1>
+            <a href="{% url 'gigs:gig_list' %}">Live Gigs</a>
+        </h1>
+        <p>Discover your next live music experience.</p>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

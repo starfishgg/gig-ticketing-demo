@@ -1,0 +1,52 @@
+
+{% extends "gigs/base.html" %}
+
+{% block title %}Book Tickets | Live Gigs{% endblock %}
+
+{% block content %}
+    <h2>
+        <a href="{% url 'gigs:gig_detail' gig.pk %}">
+            ← Back to gig
+        </a>
+    </h2>
+
+    <section class="panel">
+        <h2>Book tickets</h2>
+        <h3>{{ gig.title }}</h3>
+
+        <p>{{ ticket_type.name }}</p>
+        <p class="price">£{{ ticket_type.price|floatformat:2 }} per ticket</p>
+        <p class="muted">
+            {{ ticket_type.quantity_available }} tickets currently available
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-field">
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {% for error in field.errors %}
+                        <p class="form-errors">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button class="button" type="submit">
+                Continue with demo booking
+            </button>
+        </form>
+
+        <p class="muted">
+            This demo does not process payments.
+        </p>
+    </section>
+{% endblock %}

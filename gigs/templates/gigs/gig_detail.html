@@ -1,0 +1,64 @@
+
+{% extends "gigs/base.html" %}
+
+{% block title %}{{ gig.title }} | Live Gigs{% endblock %}
+
+{% block content %}
+    <h2>
+        <a href="{% url 'gigs:gig_list' %}">← All gigs</a>
+    </h2>
+
+    <section class="panel">
+        <h2>{{ gig.title }}</h2>
+
+        <p class="muted">
+            {{ gig.starts_at|date:"l, j F Y" }}
+            at {{ gig.starts_at|date:"H:i" }}
+        </p>
+
+        <h3>Venue</h3>
+        <p>
+            <strong>{{ gig.venue.name }}</strong><br>
+            {{ gig.venue.address }}<br>
+            {{ gig.venue.city }}
+        </p>
+
+        <h3>About this gig</h3>
+        <p>{{ gig.description|linebreaksbr }}</p>
+    </section>
+
+    <section class="panel">
+        <h2>Tickets</h2>
+
+        {% for ticket in gig.ticket_types.all %}
+            <div class="ticket">
+                <div>
+                    <strong>{{ ticket.name }}</strong>
+                    <div class="muted">
+                        {{ ticket.quantity_available }} listed
+                    </div>
+                </div>
+
+                <div>
+                    <p class="price">
+                        £{{ ticket.price|floatformat:2 }}
+                    </p>
+                    <p>
+                        {% if ticket.quantity_available > 0 %}
+                            <a
+                                class="button"
+                                href="{% url 'gigs:book_ticket' gig.pk ticket.pk %}"
+                            >
+                                Book tickets
+                            </a>
+                        {% else %}
+                            <span class="muted">Sold out</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        {% empty %}
+            <p>Tickets are not available yet. Please check back soon.</p>
+        {% endfor %}
+    </section>
+{% endblock %}
